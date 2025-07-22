@@ -2,7 +2,7 @@
   "Default": {
     "resize": 0,
     "keep_original_size": true,
-    "crf": 25,
+    "crf": 24,
     "x264_profile": "high",
     "x264_preset": "medium",
     "remove_audio": false,
