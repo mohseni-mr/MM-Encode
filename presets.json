@@ -1,28 +1,15 @@
 {
-    "High Quality": {
+    "Full HD - Tutorials": {
         "resize": 1080,
         "keep_original_size": false,
-        "crf": 20,
-        "x264_profile": "high",
+        "crf": 25,
+        "x264_profile": "main",
         "x264_preset": "slow",
         "remove_audio": false,
-        "audio_channels": 2,
-        "audio_bitrate": 192,
+        "audio_channels": 1,
+        "audio_bitrate": 48,
         "sharpen": true,
-        "remove_duplicates": false,
-        "boost_contrast": true
-    },
-    "Fast Encode": {
-        "resize": 720,
-        "keep_original_size": false,
-        "crf": 28,
-        "x264_profile": "main",
-        "x264_preset": "fast",
-        "remove_audio": false,
-        "audio_channels": 2,
-        "audio_bitrate": 128,
-        "sharpen": false,
         "remove_duplicates": true,
         "boost_contrast": false
-    }
+    },
 }
