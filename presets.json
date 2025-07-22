@@ -1,4 +1,17 @@
 {
+    "Default": {
+    "resize": 0,
+    "keep_original_size": true,
+    "crf": 25,
+    "x264_profile": "high",
+    "x264_preset": "medium",
+    "remove_audio": false,
+    "audio_channels": 1,
+    "audio_bitrate": 96,
+    "sharpen": false,
+    "remove_duplicates": false,
+    "boost_contrast": false
+  },
   "Full HD - Tutorials": {
     "resize": 1080,
     "keep_original_size": false,
