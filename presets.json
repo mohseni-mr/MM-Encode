@@ -11,5 +11,5 @@
         "sharpen": true,
         "remove_duplicates": true,
         "boost_contrast": false
-    },
+    }
 }
