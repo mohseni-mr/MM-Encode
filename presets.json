@@ -1,67 +1,114 @@
 {
-   "Default": {
-      "resize": 1080,
-      "keep_original_size": false,
-      "crf": 25,
-      "x264_profile": "main",
-      "x264_preset": "slow",
-      "remove_audio": false,
-      "audio_channels": 1,
-      "audio_bitrate": 64,
-      "sharpen": true,
-      "remove_duplicates": true,
-      "boost_contrast": false
-   },
-   "Full HD - Tutorials": {
-      "resize": 1080,
-      "keep_original_size": false,
-      "crf": 25,
-      "x264_profile": "main",
-      "x264_preset": "slow",
-      "remove_audio": false,
-      "audio_channels": 1,
-      "audio_bitrate": 64,
-      "sharpen": true,
-      "remove_duplicates": true,
-      "boost_contrast": false
-   },
-   "High Quality": {
-      "resize": 0,
-      "keep_original_size": true,
-      "crf": 20,
-      "x264_profile": "high",
-      "x264_preset": "slow",
-      "remove_audio": false,
-      "audio_channels": 2,
-      "audio_bitrate": 192,
-      "sharpen": false,
-      "remove_duplicates": true,
-      "boost_contrast": false
-   },
-   "Instagram Post": {
-      "resize": 1080,
-      "keep_original_size": false,
-      "crf": 24,
-      "x264_profile": "high",
-      "x264_preset": "medium",
-      "remove_audio": false,
-      "audio_channels": 2,
-      "audio_bitrate": 128,
-      "sharpen": true,
-      "remove_duplicates": true,
-      "boost_contrast": true
-   },
-   "Instagram Story": {
-      "resize": 1080,
-      "keep_original_size": false,
-      "crf": 25,
-      "x264_profile": "high",
-      "x264_preset": "fast",
-      "remove_audio": false,
-      "audio_channels": 2,
-      "audio_bitrate": 96,
-      "sharpen": true,
-      "remove_duplicates": true,
-      "boost_contrast": true
-   },
+  // General-purpose, good balance for most content
+  "Default": {
+    "resize": 1080,                // shortest edge
+    "keep_original_size": false,
+    "crf": 23,                     // slightly higher quality than 25, still compact
+    "x264_profile": "high",        // modern devices: high is fine
+    "x264_preset": "slow",
+    "remove_audio": false,
+    "audio_channels": 2,           // stereo is safer for social + devices
+    "audio_bitrate": 128,          // 128k AAC baseline
+    "sharpen": false,              // avoid oversharpen by default
+    "boost_contrast": false,
+    "fps_mode": "preserve",        // keep common source fps (CFR enforced in pipeline)
+    "fps_custom": 30               // ignored unless fps_mode == "custom"
+  },
+
+  // Screen-capture / tutorial videos (UI text clarity)
+  "Full HD - Tutorials": {
+    "resize": 1080,
+    "keep_original_size": false,
+    "crf": 21,                     // crisper text
+    "x264_profile": "high",
+    "x264_preset": "slow",
+    "remove_audio": false,
+    "audio_channels": 2,
+    "audio_bitrate": 160,          // clearer voice/music
+    "sharpen": false,              // avoid ringing on UI edges
+    "boost_contrast": false,
+    "fps_mode": "preserve",        // preserves 30/60 if captured that way
+    "fps_custom": 60               // ignored unless custom; helpful option for 60fps UIs
+  },
+
+  // High bitrate-looking CRF without resizing
+  "High Quality": {
+    "resize": 0,                   // 0 + keep_original_size=true => no resize
+    "keep_original_size": true,
+    "crf": 20,
+    "x264_profile": "high",
+    "x264_preset": "slow",
+    "remove_audio": false,
+    "audio_channels": 2,
+    "audio_bitrate": 192,
+    "sharpen": false,
+    "boost_contrast": false,
+    "fps_mode": "preserve",
+    "fps_custom": 30
+  },
+
+  // Instagram feed/post (square/portrait/landscape within IG limits)
+  // We enforce CFR 30 via filtergraph; resizing keeps aspect using shortest edge.
+  "Instagram Post": {
+    "resize": 1080,
+    "keep_original_size": false,
+    "crf": 22,                     // a touch higher quality for social re-encode
+    "x264_profile": "high",
+    "x264_preset": "slow",
+    "remove_audio": false,
+    "audio_channels": 2,
+    "audio_bitrate": 128,
+    "sharpen": true,               // gentle crisp for phone viewing
+    "boost_contrast": true,        // mild pop helps after IG transcode
+    "fps_mode": "fixed",           // force 30 for maximum IG compatibility
+    "fps_custom": 30
+  },
+
+  // Instagram story/reel (portrait-friendly; we still keep aspect)
+  "Instagram Story": {
+    "resize": 1080,
+    "keep_original_size": false,
+    "crf": 23,                     // smaller files; IG will re-encode anyway
+    "x264_profile": "high",
+    "x264_preset": "medium",       // a bit faster when batch-exporting
+    "remove_audio": false,
+    "audio_channels": 2,
+    "audio_bitrate": 128,
+    "sharpen": true,
+    "boost_contrast": true,
+    "fps_mode": "fixed",           // Reels/Stories prefer ≥30; fix at 30
+    "fps_custom": 30
+  },
+
+  // Fast export when you need speed over size
+  "Fast Export": {
+    "resize": 1080,
+    "keep_original_size": false,
+    "crf": 24,
+    "x264_profile": "high",
+    "x264_preset": "medium",
+    "remove_audio": false,
+    "audio_channels": 2,
+    "audio_bitrate": 128,
+    "sharpen": false,
+    "boost_contrast": false,
+    "fps_mode": "preserve",
+    "fps_custom": 30
+  },
+
+  // Silent social loop (e.g., background visuals)
+  "No Audio Social": {
+    "resize": 1080,
+    "keep_original_size": false,
+    "crf": 22,
+    "x264_profile": "high",
+    "x264_preset": "slow",
+    "remove_audio": true,          // strip audio
+    "audio_channels": 2,           // ignored when remove_audio=true
+    "audio_bitrate": 128,
+    "sharpen": true,
+    "boost_contrast": true,
+    "fps_mode": "fixed",
+    "fps_custom": 30
+  }
 }
