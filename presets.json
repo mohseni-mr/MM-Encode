@@ -1,8 +1,8 @@
 {
   // General-purpose, good balance for most content
-  "Default": {
+  "General": {
     "resize": 1080,                // shortest edge
-    "keep_original_size": false,
+    "keep_original_size": true,
     "crf": 23,                     // slightly higher quality than 25, still compact
     "x264_profile": "high",        // modern devices: high is fine
     "x264_preset": "slow",
@@ -18,26 +18,26 @@
   // Screen-capture / tutorial videos (UI text clarity)
   "Full HD - Tutorials": {
     "resize": 1080,
-    "keep_original_size": false,
-    "crf": 21,                     // crisper text
+    "keep_original_size": true,
+    "crf": 25,                     // crisper text
     "x264_profile": "high",
     "x264_preset": "slow",
     "remove_audio": false,
-    "audio_channels": 2,
-    "audio_bitrate": 160,          // clearer voice/music
-    "sharpen": false,              // avoid ringing on UI edges
+    "audio_channels": 1,
+    "audio_bitrate": 128,          // clearer voice/music
+    "sharpen": true,              // avoid ringing on UI edges
     "boost_contrast": false,
-    "fps_mode": "preserve",        // preserves 30/60 if captured that way
-    "fps_custom": 60               // ignored unless custom; helpful option for 60fps UIs
+    "fps_mode": "fixed",        // preserves 30/60 if captured that way
+    "fps_custom": 30               // ignored unless custom; helpful option for 60fps UIs
   },
 
   // High bitrate-looking CRF without resizing
   "High Quality": {
     "resize": 0,                   // 0 + keep_original_size=true => no resize
     "keep_original_size": true,
-    "crf": 20,
+    "crf": 22,
     "x264_profile": "high",
-    "x264_preset": "slow",
+    "x264_preset": "veryslow",
     "remove_audio": false,
     "audio_channels": 2,
     "audio_bitrate": 192,
@@ -52,7 +52,7 @@
   "Instagram Post": {
     "resize": 1080,
     "keep_original_size": false,
-    "crf": 22,                     // a touch higher quality for social re-encode
+    "crf": 23,                     // a touch higher quality for social re-encode
     "x264_profile": "high",
     "x264_preset": "slow",
     "remove_audio": false,
@@ -68,7 +68,7 @@
   "Instagram Story": {
     "resize": 1080,
     "keep_original_size": false,
-    "crf": 23,                     // smaller files; IG will re-encode anyway
+    "crf": 24,                     // smaller files; IG will re-encode anyway
     "x264_profile": "high",
     "x264_preset": "medium",       // a bit faster when batch-exporting
     "remove_audio": false,
@@ -79,36 +79,4 @@
     "fps_mode": "fixed",           // Reels/Stories prefer ≥30; fix at 30
     "fps_custom": 30
   },
-
-  // Fast export when you need speed over size
-  "Fast Export": {
-    "resize": 1080,
-    "keep_original_size": false,
-    "crf": 24,
-    "x264_profile": "high",
-    "x264_preset": "medium",
-    "remove_audio": false,
-    "audio_channels": 2,
-    "audio_bitrate": 128,
-    "sharpen": false,
-    "boost_contrast": false,
-    "fps_mode": "preserve",
-    "fps_custom": 30
-  },
-
-  // Silent social loop (e.g., background visuals)
-  "No Audio Social": {
-    "resize": 1080,
-    "keep_original_size": false,
-    "crf": 22,
-    "x264_profile": "high",
-    "x264_preset": "slow",
-    "remove_audio": true,          // strip audio
-    "audio_channels": 2,           // ignored when remove_audio=true
-    "audio_bitrate": 128,
-    "sharpen": true,
-    "boost_contrast": true,
-    "fps_mode": "fixed",
-    "fps_custom": 30
-  }
 }
